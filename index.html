@@ -105,7 +105,13 @@
   #hint{position:fixed;bottom:16px;left:50%;transform:translateX(calc(-50% - var(--panelw)/2));
     font-size:11px;color:var(--dim2);z-index:4;pointer-events:none}
   #loading{position:fixed;inset:0;display:grid;place-items:center;z-index:20;background:var(--bg0);
-    font-size:12px;color:var(--dim);letter-spacing:.14em;text-transform:uppercase;transition:opacity .5s}
+    transition:opacity .5s;text-align:center;padding:24px}
+  #loading .lg1{font-size:11px;color:var(--dim);letter-spacing:.26em;text-transform:uppercase;margin-bottom:9px}
+  #loading .lg2{font-size:26px;font-weight:700;color:var(--ink);letter-spacing:.02em;line-height:1.2}
+  #loading .lg2 b{color:#22d3ee;font-weight:700}
+  #loading .lg3{margin-top:12px;font-size:12px;color:var(--dim);letter-spacing:.05em}
+  #loading .lg4{margin-top:26px;font-size:10.5px;color:var(--dim);letter-spacing:.2em;text-transform:uppercase;opacity:.75}
+  @media (max-width:520px){ #loading .lg2{font-size:20px} }
   #loading.off{opacity:0;pointer-events:none}
   @media (max-width:900px) and (orientation:portrait){
     :root{--panelw:0px}
@@ -135,7 +141,7 @@
       border-left:1px solid var(--line);border-top:0}
     #topbar{right:300px} #topbar h1{font-size:14px} #topbar .sub{display:none}
     #tools{left:10px;bottom:10px;top:auto;width:268px;gap:6px}
-    #tools .seg button{padding:5px 6px;font-size:10px;white-space:nowrap}
+    #tools .seg button{padding:5px 5px;font-size:9.5px;white-space:nowrap}
     #tools .group{padding:6px 8px} #tools .lbl{display:none}
     .btn{padding:5px 8px;font-size:10.5px}
     .btn.cap{display:flex}
@@ -165,7 +171,7 @@
       <button data-v="terr" class="on">El valle</button>
       <button data-v="agua">La poza</button>
       <button data-v="eco">La vida</button>
-      <button data-v="riesgo">Lo que seca</button>
+      <button data-v="riesgo">Amenazas</button>
     </div>
   </div>
   <div class="group" id="gInf" style="display:none">
@@ -210,8 +216,13 @@
   <button class="backbtn" id="pback" style="display:none">← Volver</button>
 </aside>
 
-<div id="hint">Arrastra para girar · rueda para acercar · toca cualquier elemento</div>
-<div id="loading">Levantando las montañas…</div>
+<div id="hint">Arrastra para girar · rueda para acercar · toca cualquier elemento · <a href="https://www.procuatrocienegas.com" target="_blank" rel="noopener" style="color:inherit">Fundación Pro Cuatrociénegas ↗</a></div>
+<div id="loading"><div>
+  <div class="lg1">Fundación</div>
+  <div class="lg2">PRO <b>CUATROCIÉNEGAS</b></div>
+  <div class="lg3">procuatrocienegas.com</div>
+  <div class="lg4">Levantando el valle…</div>
+</div></div>
 
 <script>/**
  * @license
@@ -226,9 +237,11 @@ const DATA={
 valle:{v:'terr',t:"Cuatro Ciénegas",tag:"Qué es",color:"#22d3ee",sub:"Un archipiélago de agua turquesa en pleno desierto",
  d:"En medio del desierto chihuahuense, a unos <b>740 m</b> de altitud y rodeado por seis sierras de caliza, hay un valle con <b>cientos de manantiales</b> que la gente llama <b>pozas</b>. Son de agua clara, tibia y constante, y llevan ahí tanto tiempo que la vida de adentro siguió su propio camino evolutivo. No es un oasis: es una cuenca entera funcionando como isla.",
  f:["El área protegida mide <b>84 347 hectáreas</b>; el valle completo ronda las <b>150 000</b>.",
+   "Hay <b>más de 300 manantiales</b>, concentrados sobre todo al pie de la sierra de San Marcos y Pinos.",
    "Las pozas van de menos de <b>1 m</b> a más de <b>100 m</b> de diámetro, y de 50 cm a <b>18 m</b> de profundidad.",
    "Municipio de <b>Cuatrociénegas de Carranza</b>, Coahuila, en plena Sierra Madre Oriental.",
    "Fue cuenca cerrada durante milenios. Desde <b>1987</b> las pozas están artificialmente conectadas por canales para uso agrícola.",
+   "En aguas superficiales pertenece a la región hidrológica <b>Bravo-Conchos</b>; el agua que sale del valle va a los valles de Sacramento, Nadadores, Lamadrid y Frontera.",
    "En este modelo el relieve y la posición de cada poza son <b>orientativos</b>: el grupo del surponiente (Becerra, Mezquites, Azules, Churince) va sobre la carretera 30 y el otro grupo queda del lado oriente de la sierra de San Marcos."],
  hook:"El desierto más seco de México guarda el agua más antigua y más viva del país.",
  links:[["Decreto del área protegida (DOF, 7 nov 1994)","https://www.dof.gob.mx/nota_detalle.php?codigo=4759233&fecha=07/11/1994"]],
@@ -264,6 +277,33 @@ comosellaman:{v:'terr',t:"¿Cómo se les dice?",tag:"Qué es",color:"#67e8f9",su
    "En términos técnicos son <b>manantiales cársticos</b>: agua que sale de caliza disuelta por dentro."],
  hook:"El pueblo se llama Cuatro Ciénegas por los humedales, no por las pozas. Las pozas son los ojos; las ciénegas, la piel mojada alrededor."},
 
+yuca:{v:'terr',t:"La yuca de la orilla",tag:"Planta",color:"#86a35c",sub:"La roseta de la foto clásica",
+ d:"Es la planta que sale en casi todas las fotos de Cuatro Ciénegas: una <b>roseta de hojas rígidas y puntiagudas</b> sobre un tronco corto, plantada en la costra blanca a unos pasos del agua turquesa. Yucas y sotoles son el sello del desierto chihuahuense.",
+ f:["Crece justo en el borde: aguanta el suelo salino y yesoso donde el zacate ya no puede.",
+   "Sus hojas fibrosas se usaron durante siglos para cordelería, cestería y sandalias.",
+   "Florece en un tallo alto con racimo de flores blancas; algunas especies solo las poliniza una palomilla específica.",
+   "En el modelo va junto a una poza, que es exactamente donde la ves en las fotos."],
+ hook:"Roseta espinosa, arena blanca y agua turquesa: esa es la postal, y las tres cosas son la misma historia geológica."},
+
+mezquite:{v:'terr',t:"El mezquite",tag:"Planta",color:"#6b7a45",sub:"El árbol que hace posible el desierto",
+ d:"<i>Prosopis</i>. Es el árbol del norte de México: raíces que bajan decenas de metros a buscar agua, sombra donde nada más da sombra, y <b>vainas dulces</b> que fueron alimento básico de los pueblos del desierto. Bajo su copa el suelo es más fértil y más húmedo que dos metros afuera.",
+ f:["Sus raíces pueden alcanzar el <b>nivel freático</b> a decenas de metros: por eso sobrevive donde nada más lo hace.",
+   "Fija nitrógeno en el suelo, así que mejora la tierra alrededor: se le llama <b>isla de fertilidad</b>.",
+   "Las <b>vainas</b> se molían en harina: fue alimento fundamental de los pueblos cazadores-recolectores del norte.",
+   "Da sombra, leña, forraje y miel. En el desierto un mezquite es infraestructura.",
+   "El ejemplar con etiqueta del modelo está <b>fuera de escala a propósito</b>: a 50 km de ancho un árbol real sería invisible. Lo que sí está a escala son los manchones de cobertura del suelo."],
+ hook:"Un árbol que planta su propio jardín: bajo su copa crece lo que afuera no puede."},
+
+gobernadora:{v:'terr',t:"La gobernadora",tag:"Planta",color:"#4f6136",sub:"La planta más terca del desierto",
+ d:"<i>Larrea tridentata</i>, también llamada <b>creosota</b>. Es el arbusto que domina el desierto chihuahuense: hojas pequeñas, resinosas y brillantes, con ese olor característico que aparece en cuanto llueve. Los matorrales redondos y oscuros del modelo son ella.",
+ f:["Se llama <b>gobernadora</b> porque libera compuestos que inhiben la germinación de sus vecinas: gobierna el terreno a su alrededor.",
+   "Por eso crece separada y pareja, casi como si alguien la hubiera sembrado en cuadrícula.",
+   "Es de los organismos más longevos del planeta: hay clones documentados de miles de años.",
+   "Su olor a lluvia es el olor del desierto después de una tormenta.",
+   "Su avance sobre el pastizal es una señal de degradación: donde el pasto se pierde, ella entra.",
+   "El ejemplar con etiqueta va <b>fuera de escala</b>, como la viñeta de un mapa; los manchones verdes oscuros del llano sí son su cobertura real."],
+ hook:"Cuando la gobernadora gana terreno al zacate, el suelo ya está en problemas — y ahí es donde entra el bisonte."},
+
 carretera:{v:'terr',t:"La carretera 30",tag:"Cómo se visita",color:"#a8a29e",sub:"El hilo que une el pueblo con las pozas",
  d:"Casi todo lo que se visita está sobre la <b>carretera federal 30</b>, la que sale del pueblo rumbo a Torreón. Por ese camino se llega a la <b>Poza de la Becerra</b>, al <b>río Mezquites</b> y, pasando la Becerra por terracería, a las <b>dunas de yeso</b>.",
  f:["Las dunas están a unos <b>14 km al suroeste</b> del pueblo, en el km 102 de la federal 30.",
@@ -279,6 +319,22 @@ peces:{v:'terr',t:"Los peces de la poza",tag:"Fauna",color:"#93c5fd",sub:"Sí: h
    "Las especies introducidas —como la lobina negra— se comen a las nativas y son una de las amenazas serias.",
    "Por eso conectar pozas con canales, que sonaba práctico, fue un problema: permitió que todo se mezclara."],
  hook:"Asómate a una poza y estás viendo peces que no existen en ningún otro río del mundo."},
+
+burro:{v:'terr',t:"Serranías del Burro",tag:"Contexto",color:"#94a3b8",sub:"El norte, camino a la frontera",
+ d:"Al norte del valle el desierto sigue y se levanta en las <b>Serranías del Burro</b> y, más allá, en las <b>Maderas del Carmen</b>. Es una de las regiones mejor conservadas del norte de México: ahí viven oso negro, puma y águila real.",
+ f:["Forman parte del mismo patrón de <b>sierra y valle</b> que se ve en todo el modelo.",
+   "Son también zona de recarga: las sierras del desierto son las que guardan el agua.",
+   "En esa región están otros proyectos de conservación privada y comunitaria del norte.",
+   "El oso negro y el puma se mueven entre estas sierras: el corredor importa tanto como el sitio."],
+ hook:"El valle no es una isla aislada del todo: forma parte de un rosario de sierras que cruza el norte."},
+
+lagunera:{v:'terr',t:"La Comarca Lagunera",tag:"Contexto",color:"#f472b6",sub:"El destino final del agua",
+ d:"A unos <b>250 km al surponiente</b> está la <b>Comarca Lagunera</b>, la cuenca lechera más grande de México. Ahí va a parar la alfalfa que se riega con el agua que sale de Cuatro Ciénegas. Es el eslabón que casi nunca se nombra cuando se habla del secado del valle.",
+ f:["La demanda de forraje no es local: viene de esa industria regional.",
+   "Es la razón económica por la que se siembra alfalfa en un desierto.",
+   "La Laguna vive a su vez de un acuífero sobreexplotado y con problemas de arsénico.",
+   "Cambiar el cultivo aquí depende de decisiones que se toman allá."],
+ hook:"El agua más antigua de México acaba, literalmente, convertida en leche a 250 km."},
 
 detras:{v:'terr',t:"¿Y detrás de las sierras?",tag:"Contexto",color:"#94a3b8",sub:"Lo más raro está adentro, no afuera",
  d:"Corta respuesta: <b>lo interesante está dentro del valle</b>. Las dunas de yeso, las pozas, los estromatolitos y las especies endémicas están todos del lado de acá de las sierras. Lo de afuera importa por otra razón: por lo que le hace al agua de aquí.",
@@ -296,13 +352,23 @@ valles:{v:'terr',t:"Los valles del riego",tag:"Contexto",color:"#a3e635",sub:"A 
    "Cambiar el cultivo o tecnificar el riego devolvería caudal al valle de inmediato."],
  hook:"El agua más antigua de México cruza una sierra para regar alfalfa."},
 
-desierto:{v:'terr',t:"El desierto de alrededor",tag:"Contexto",color:"#94a3b8",sub:"300 km de matorral sin manantiales",
- d:"Fuera del valle empieza el <b>desierto chihuahuense</b> de verdad: matorral, lechuguilla, gobernadora y ni un cuerpo de agua permanente en cientos de kilómetros. Ese contraste es exactamente lo que hace excepcional a Cuatro Ciénegas.",
+desierto:{v:'terr',t:"El desierto chihuahuense",tag:"Contexto",color:"#b6a689",sub:"300 km de matorral sin manantiales",
+ d:"Lo que rodea al valle en el modelo no es relleno: es el <b>desierto chihuahuense</b>, el más grande de Norteamérica. Matorral de gobernadora, lechuguilla y mezquite disperso sobre grava, con cuencas planas separadas por sierras paralelas — el patrón de <b>sierra y valle</b> que ves repetirse hasta el borde del mapa. Y ni un cuerpo de agua permanente en cientos de kilómetros.",
  f:["El desierto chihuahuense es el más grande de Norteamérica.",
    "Es también uno de los centros mundiales de diversidad de <b>cactáceas</b>.",
    "El agua de las pozas no viene de la lluvia del desierto: viene de la lluvia de las sierras, infiltrada hace mucho.",
-   "Por eso el valle funciona como isla: está rodeado de un mar de tierra seca."],
+   "Por eso el valle funciona como isla: está rodeado de un mar de tierra seca.",
+   "El anillo de terreno del modelo es <b>esquemático</b>: reproduce el patrón del desierto, no sierras concretas una por una."],
  hook:"Un archipiélago de agua en medio de un océano de desierto. La metáfora es literal."},
+
+fundacion:{v:'terr',t:"Fundación Pro Cuatrociénegas",tag:"Quién cuida esto",color:"#22d3ee",sub:"Quienes trabajan por el valle desde adentro",
+ d:"Este modelo se hizo para divulgar el valle, y el trabajo de fondo lo hace gente en el terreno. La <b>Fundación Pro Cuatrociénegas</b> es una de las organizaciones que empuja la conservación del sistema: es quien coordinó, con el Fondo Mexicano para la Conservación de la Naturaleza, Cuenca Los Ojos y la CONANP, el <b>regreso del bisonte americano</b> al valle en 2025.",
+ f:["Sitio: <b>procuatrocienegas.com</b> · Instagram: <b>pro.cuatrocienegas</b>.",
+   "Coordinó la liberación de <b>44 bisontes</b> en la reserva El Santuario, en noviembre de 2025.",
+   "El bisonte no es un adorno: al pastar mejora la infiltración de la lluvia, que es exactamente lo que le falta al valle.",
+   "Conservar aquí no depende de un decreto lejano, sino de organizaciones y comunidades trabajando en el sitio."],
+ hook:"Los datos de este modelo salen de fuentes públicas; el trabajo de campo lo hacen ellos.",
+ links:[["Fundación Pro Cuatrociénegas","https://www.procuatrocienegas.com"]]},
 
 anp:{v:'terr',t:"El trazo: qué es un ANP",tag:"Gobernanza",color:"#5eead4",sub:"Área Natural Protegida · 84 347 ha desde 1994",
  d:"La línea verde que rodea el valle es el <b>trazo del ANP</b>. <b>ANP</b> quiere decir <b>Área Natural Protegida</b>: una figura legal federal con la que el gobierno mexicano reserva un territorio y le pone reglas de uso. Aquí la categoría concreta es <b>APFF, Área de Protección de Flora y Fauna</b>, decretada el <b>7 de noviembre de 1994</b>.",
@@ -327,7 +393,7 @@ fragua:{v:'terr',t:"Sierra La Fragua",tag:"Sierra",color:"#a78bfa",sub:"El costa
  d:"Delimita el valle por el poniente y lo separa de otras cuencas vecinas. Detrás de ella está el <b>valle de El Hundido</b>, donde se perforaron pozos profundos para riego — y donde empezó buena parte del problema.",
  f:["Ronda los <b>2 600 m</b> de altitud.",
    "Su ladera oriental capta lluvia que se infiltra hacia el sistema de Cuatro Ciénegas.",
-   "El acuífero cárstico no respeta la línea de la sierra: circula por debajo.",
+   "El acuífero cárstico no respeta la línea de la sierra: circula por debajo. Se discute también su conexión con el valle de <b>Calaveras</b>.",
    "Por eso lo que se bombea al otro lado sí se siente aquí, aunque legalmente sean valles distintos."],
  hook:"La sierra separa dos valles en el mapa, pero no separa el agua debajo de ella."},
 
@@ -380,6 +446,54 @@ acuifero:{v:'terr',t:"El acuífero cárstico",tag:"Agua",color:"#22d3ee",sub:"Ag
    "El acuífero se extiende <b>más allá del área protegida</b>: se puede bombear legalmente fuera y vaciarlo por dentro."],
  hook:"El agua que ves en la poza entró a la montaña mucho antes de que existiera el pueblo.",
  links:[["El fenómeno cárstico del valle de Cuatro Ciénegas (La Venta)","https://www.laventa.it/documenti/approfondimenti/4C/2007_Piccinietal_4C_CNME.pdf"]]},
+
+rmezquites:{v:'terr',t:"Río Mezquites",tag:"Río",color:"#38bdf8",sub:"El río permanente del desierto",
+ d:"Es el curso de agua más conocido del valle: un río de agua clara y tibia, bordeado de mezquites y carrizo, que corre <b>todo el año</b> en pleno desierto chihuahuense. Hoy también se le llama <b>Río San Marcos</b>, por la sierra que lo acompaña.",
+ f:["Su caudal no viene de la lluvia: viene del acuífero, por eso es constante.",
+   "Conecta varias pozas, así que es el corredor por donde se mueven peces y tortugas.",
+   "Es uno de los pocos sitios habilitados para nadar, con reglas.",
+   "Si el nivel del acuífero baja, es de los primeros lugares donde se nota."],
+ hook:"Un río que corre los 365 días del año en uno de los desiertos más secos de México."},
+
+rgarabatal:{v:'terr',t:"Río Garabatal",tag:"Río",color:"#22d3ee",sub:"El del costado poniente",
+ d:"Otro de los cursos con nombre propio del valle, en el sector occidental. Junto con el Mezquites es de los pocos ríos permanentes del sistema; el resto del agua viaja por debajo.",
+ f:["Drena la parte occidental del valle, la del sistema Churince y las dunas.",
+   "Como todos los de aquí, su caudal depende del nivel del acuífero, no de la lluvia.",
+   "Su vegetación de ribera es hábitat de aves y de la tortuga de bisagra.",
+   "En el modelo el trazo es orientativo: sirve para entender la red, no para navegar."],
+ hook:"Donde hay un río permanente en el desierto, hay un acuífero sano debajo."},
+
+rcanon:{v:'terr',t:"Río Cañón",tag:"Río",color:"#7dd3fc",sub:"El que baja de la sierra",
+ d:"Baja del flanco de las sierras occidentales hacia el valle. Es la parte visible del recorrido: la mayoría del agua hace ese mismo camino, pero por dentro de la roca.",
+ f:["Los cañones de la caliza son la puerta de entrada del agua de lluvia al sistema cárstico.",
+   "En estiaje puede quedar reducido a charcos; en tormenta corre con fuerza.",
+   "Arrastra grava caliza que forma los abanicos aluviales del piedemonte.",
+   "Es el contraste perfecto con las pozas: uno depende de la lluvia, las otras no."],
+ hook:"El río de la sierra depende del cielo. Las pozas dependen de la roca."},
+
+rbecerra:{v:'terr',t:"Sistema Becerra",tag:"Río",color:"#0ea5e9",sub:"Poza, arroyo y laguna",
+ d:"Los cuerpos de agua del valle no están sueltos: funcionan como <b>sistemas</b> — un manantial que alimenta un arroyo que termina en una laguna. El Becerra es uno de ellos, y el Churince era otro.",
+ f:["Manantial → arroyo → laguna: ese es el esquema de casi todos los sistemas del valle.",
+   "Cada tramo tiene su propia química y sus propias especies.",
+   "Estudiar un sistema completo es como estudiar un río entero en un kilómetro.",
+   "Cuando baja el acuífero, el sistema se corta por el eslabón más débil: la laguna terminal."],
+ hook:"Se secan de abajo hacia arriba: primero la laguna, luego el arroyo, al final el ojo de agua."},
+
+rtecla:{v:'terr',t:"Enlace a Santa Tecla",tag:"Río",color:"#38bdf8",sub:"Por aquí empieza la salida",
+ d:"Tramo del oriente del valle que conduce hacia la zona de donde arranca el <b>canal Santa Tecla</b>. Es el punto donde el agua deja de ser del ecosistema y pasa a ser del riego.",
+ f:["El valle era una cuenca cerrada: no tenía salida natural.",
+   "Hoy los canales sacan <b>tres cuartas partes</b> del agua que abandona el valle.",
+   "El agua sale hacia Sacramento, Nadadores, Lamadrid y Frontera.",
+   "Cerrar o reducir esa salida es la medida más directa que existe para recuperar las pozas."],
+ hook:"Aquí es donde se decide, litro por litro, si el valle se queda con su agua."},
+
+rchurince:{v:'terr',t:"Sistema Churince (seco)",tag:"Río",color:"#22d3ee",sub:"El trazo de lo que ya no corre",
+ d:"El sistema Churince —manantial, arroyo y laguna terminal— era el más estudiado del valle. Perdió el <b>99 %</b> de su superficie de agua hacia 2006 y para <b>2016</b> estaba seco por completo. Su trazo sigue en el mapa; el agua no.",
+ f:["Décadas de datos científicos documentaron su descenso año con año.",
+   "Ahí se midió el agua con menos fósforo conocida a nivel continental.",
+   "Su secado coincide con la perforación de pozos en los valles vecinos.",
+   "Las especies exclusivas de ese sistema se perdieron con él."],
+ hook:"Está dibujado porque hay que recordar por dónde corría."},
 
 rios:{v:'terr',t:"Los ríos que unen las pozas",tag:"Agua",color:"#38bdf8",sub:"Hilos de agua entre manantiales",
  d:"Además de las pozas hay arroyos permanentes que las conectan, como el <b>río Mezquites</b>. Ese tejido es lo que permite que los peces y las tortugas se muevan entre pozas — y también lo que hace que un daño en un punto se propague.",
@@ -681,6 +795,109 @@ gipsofilas:{v:'eco',t:"Las plantas del yeso",tag:"Planta",color:"#9ca86b",sub:"C
    "Son de las especies más fáciles de perder: dependen de un sustrato de 800 hectáreas."],
  hook:"Especializarse tanto tiene un precio: si desaparecen las dunas, desaparecen ellas."},
 
+/* ---------------- VISTA 5 · EL BISONTE ---------------- */
+bisonte2:{v:'eco',t:"Bison bison",tag:"Fauna",color:"#a16207",sub:"El animal terrestre más grande de Norteamérica",
+ d:"Un macho adulto puede pesar cerca de <b>900 kg</b> y medir casi <b>4 metros</b> de largo. Toda esa masa está diseñada para una cosa: <b>comer pasto y moverse</b>. La joroba no es grasa: es músculo y espina dorsal alargada, un mecanismo para bajar la cabeza y barrer la nieve o el zacate seco.",
+ f:["Longitud total: <b>3,0 a 3,8 m</b>. Peso: <b>318 a 907 kg</b>. Los machos son cerca de 9 % mayores que las hembras.",
+   "Gestación de <b>262 a 300 días</b>; las hembras paren en promedio <b>dos becerros cada tres años</b>, entre abril y junio.",
+   "Esperanza de vida en libertad: alrededor de <b>15 años</b>.",
+   "Los <b>dos sexos</b> tienen cuernos; los del macho son más gruesos y curvos.",
+   "Viven en manadas separadas por sexo salvo en la época reproductiva: los grupos mixtos van de <b>20-30 hasta más de 50</b> animales."],
+ hook:"Casi una tonelada de animal cuyo trabajo en el paisaje es, literalmente, comer pasto y pisar suelo.",
+ links:[["Programa de Acción para la Conservación: Bisonte (CONANP)","https://conanp.gob.mx/conanp/dominios/especies/WEB/docs/pace/PACE-BISONTE.pdf"]],
+ src:"CONANP, PACE Bisonte · NOM-059-SEMARNAT-2010"},
+
+joroba:{v:'eco',t:"La joroba",tag:"Anatomía",color:"#fbbf24",sub:"Músculo, no grasa",
+ d:"Es lo primero que se nota y casi todo el mundo la lee mal. La joroba está formada por <b>apófisis vertebrales alargadas</b> y la musculatura que las sostiene. Sirve de palanca para mover la cabeza de arriba abajo con fuerza: así aparta la nieve en invierno o el zacate seco para llegar al pasto verde.",
+ f:["Es más pronunciada en los machos.",
+   "Le permite alimentarse en condiciones donde otros herbívoros no alcanzan el forraje.",
+   "Junto con la cabeza baja, es la silueta que lo distingue de una vaca a un kilómetro.",
+   "En el desierto chihuahuense el problema no es la nieve, es el zacate seco y duro."],
+ hook:"No es una reserva de grasa: es una herramienta."},
+
+pelaje:{v:'eco',t:"El pelaje",tag:"Anatomía",color:"#78716c",sub:"Dos abrigos en un mismo animal",
+ d:"El bisonte carga un pelaje muy denso en la delantera —cabeza, cuello y hombros— y mucho más corto atrás. Esa asimetría le permite enfrentar el viento de cara. En primavera lo suelta a jirones, y ese pelo desprendido lo aprovechan aves y roedores para forrar nidos.",
+ f:["Soporta temperaturas bajo cero sin refugio.",
+   "En el norte de México el reto es el contrario: calor extremo y sequía.",
+   "El pelo que suelta se convierte en material de nidos: hasta la muda tiene función ecológica.",
+   "Históricamente esa piel fue lo que lo condenó: se cazó masivamente por el cuero."],
+ hook:"Lo que lo hizo sobrevivir al invierno es lo que lo hizo valioso para el comercio de pieles."},
+
+patas:{v:'eco',t:"El peso que trabaja el suelo",tag:"Ecología",color:"#a16207",sub:"Pisar también es hacer trabajo",
+ d:"El pisoteo de una manada rompe la costra del suelo, entierra semillas y abre huecos por donde entra el agua. En un desierto donde la lluvia cae de golpe y escurre, eso <b>aumenta la infiltración</b>. Es la razón ecológica de fondo por la que traer bisontes a Cuatro Ciénegas tiene sentido.",
+ f:["Los bisontes mantienen la heterogeneidad del pastizal: no comen parejo, comen a parches.",
+   "Reducen la altura de la vegetación y frenan el avance del matorral leñoso.",
+   "Redistribuyen nutrientes con el estiércol y dispersan semillas en el pelaje.",
+   "Sus <b>revolcaderos</b> se llenan de agua de lluvia y permiten que se reproduzcan anfibios.",
+   "Menos zacate seco acumulado también significa <b>menos riesgo de incendio</b>."],
+ hook:"Un herbívoro grande no es un adorno del paisaje: es parte de la maquinaria que lo mantiene funcionando.",
+ src:"CONANP, PACE Bisonte"},
+
+revolcadero:{v:'eco',t:"El revolcadero",tag:"Ecología",color:"#3b7c8c",sub:"Un charco hecho a propósito, sin querer",
+ d:"El bisonte se tira al suelo y rueda para quitarse parásitos y refrescarse. Al hacerlo una y otra vez en el mismo sitio abre una <b>depresión compactada</b>. Cuando llueve, esa depresión retiene agua y se convierte en un charco temporal — y en un charco temporal se reproducen ranas y sapos que no tendrían dónde hacerlo.",
+ f:["Son estructuras que persisten décadas en el paisaje.",
+   "Cada revolcadero es un microhábitat distinto del pastizal que lo rodea.",
+   "En zonas áridas son de los pocos cuerpos de agua temporal disponibles.",
+   "También los usan otras especies para revolcarse y para beber."],
+ hook:"Un animal rascándose la espalda termina construyendo estanques para ranas."},
+
+pastizal:{v:'eco',t:"El pastizal",tag:"Hábitat",color:"#b3a45e",sub:"El ecosistema que el bisonte necesita y devuelve",
+ d:"El pastizal desértico es de los ecosistemas más deteriorados del norte de México: sobrepastoreo de ganado, invasión de matorral leñoso y cambio de uso de suelo. El bisonte y el pastizal <b>se hicieron uno al otro</b>: sin herbívoros grandes el pasto se degrada, y sin pasto no hay bisonte.",
+ f:["Un pastizal sano infiltra mucha más agua que uno degradado y compactado por ganado.",
+   "Su recuperación beneficia al <b>perrito de la pradera</b>, al berrendo, al águila real y a decenas de aves.",
+   "Es también lo que sostiene, río abajo, la recarga de acuíferos como el de Cuatro Ciénegas.",
+   "Restaurar pastizal es una de las formas más baratas de recuperar agua."],
+ hook:"Traer al bisonte no es un gesto simbólico: es contratar de vuelta al que hacía el trabajo."},
+
+historiabis:{v:'eco',t:"Cómo desapareció y cómo volvió",tag:"Historia",color:"#ef4444",sub:"De Zacatenco a Sonora, y de vuelta",
+ d:"El bisonte no fue nunca un animal exclusivamente estadounidense. Su distribución histórica en México iba <b>desde Zacatecas y Durango hasta Coahuila, Chihuahua y Sonora</b>. La caza intensiva de la segunda mitad del siglo XIX lo borró de casi todo el norte mexicano.",
+ f:["Los registros más antiguos son de <b>Sonora</b>: Rancho La Brisca, hace unos <b>150 000 años</b>.",
+   "Hubo avistamientos hasta el <b>siglo XIX</b> en Coahuila, Sonora y la región de Casas Grandes.",
+   "La población libre de <b>Janos, Chihuahua</b> proviene probablemente de reintroducciones de 1924 y 1954 desde Estados Unidos.",
+   "El hato de conservación de <b>Rancho El Uno</b> arrancó en <b>2009 con 23 animales</b> y llegó a cerca de <b>500 en 16 años</b>.",
+   "De ahí salieron los <b>44</b> que llegaron a Cuatro Ciénegas el 30 de noviembre de 2025."],
+ hook:"Se tardó siglo y medio en desaparecer y quince años en volver a ser posible.",
+ links:[["Población de bisontes: de 23 a casi 500 en 16 años (La Jornada)","https://www.jornada.com.mx/noticia/2025/12/31/estados/poblacion-de-bisontes-americanos-pasa-de-23-a-casi-500-en-16-anos"]],
+ src:"CONANP, PACE Bisonte · La Jornada"},
+
+apaches:{v:'eco',t:"Los apaches y el bisonte",tag:"Historia",color:"#f472b6",sub:"Se peleaban guerras por el derecho a cazarlo",
+ d:"El bisonte no era solo un animal: era una <b>economía completa</b>. Carne, piel para vestido y vivienda, tendones, huesos, cuernos. Los <b>apaches</b> lo cazaban regularmente en el norte de México, y su desaparición fue también el colapso de una forma de vida.",
+ f:["El documento oficial de conservación de la especie lo consigna: los <b>apaches cazaban bisontes regularmente</b> y usaban sus pieles para vestimenta y peinados.",
+   "En <b>1834</b> se reportaba que había <b>guerras entre apaches, comanches y otros grupos por los derechos sobre los bisontes</b>.",
+   "Los <b>apaches lipanes (Ndé Lipán)</b> fueron empujados al sur por los comanches hacia 1720 y se establecieron en Texas y en <b>Coahuila</b>, con comunidades cerca de Zaragoza desde mediados del siglo XVIII.",
+   "Tras conseguir caballos alrededor de 1608, su cacería del bisonte se transformó por completo.",
+   "Su lengua, del tronco atabascano sureño, está hoy <b>al borde de la extinción</b>."],
+ hook:"Cuando se acabó el bisonte no se acabó solo una especie: se acabó el centro de una cultura.",
+ links:[["Lipan Apache (Wikipedia, EN)","https://en.wikipedia.org/wiki/Lipan_Apache_people"]],
+ src:"CONANP, PACE Bisonte · Wikipedia"},
+
+pueblosnorte:{v:'eco',t:"Quién más vivía aquí",tag:"Historia",color:"#a78bfa",sub:"Coahuila antes y después del bisonte",
+ d:"Antes de la colonización, este desierto lo habitaban grupos cazadores-recolectores que los españoles agruparon bajo el nombre de <b>coahuiltecos</b>. Después llegaron, empujados desde el norte, los <b>apaches lipanes</b>. Y en el siglo XIX llegaron dos pueblos más, invitados a poblar la frontera.",
+ f:["Coahuila reconoce hoy tres pueblos indígenas: los <b>kikapú (kikaapoa)</b>, los <b>mascogos</b> y los <b>Ndé Lipán (apaches lipanes)</b>.",
+   "Los <b>kikapú</b> llegaron desde los Grandes Lagos y se asentaron en <b>El Nacimiento, Múzquiz</b>, en 1850.",
+   "Los <b>mascogos</b> son descendientes de personas afrodescendientes que huyeron de la esclavitud en Estados Unidos y se establecieron también en Múzquiz.",
+   "En las cuevas de las sierras de Cuatro Ciénegas hay <b>pinturas rupestres</b> y restos prehispánicos: la gente lleva milenios usando este valle.",
+   "Entre 2000 y 2002 se exploraron unas <b>60 cavidades</b> en estas sierras, varias con arte rupestre."],
+ hook:"El valle no fue descubierto: fue habitado mucho antes de que alguien lo nombrara.",
+ links:[["Etnografía del pueblo kikapú (INPI)","https://www.gob.mx/inpi/articulos/etnografia-del-pueblo-kikapu-kikaapoa"]]},
+
+manada:{v:'eco',t:"La manada de El Santuario",tag:"Aquí",color:"#a16207",sub:"44 animales en 3 700 hectáreas",
+ d:"La manada que llegó a Cuatro Ciénegas está en la reserva <b>El Santuario</b>, una UMA de unas <b>3 700–4 000 hectáreas</b> en la sierra de La Menchaca, a 10 km del pueblo. Son <b>38 hembras y 6 machos</b>: una proporción pensada para que la población crezca rápido.",
+ f:["Liberados el <b>30 de noviembre de 2025</b>, después de 160 años sin bisontes en el valle.",
+   "La mayoría vino del <b>Rancho El Uno</b>, en la Reserva de la Biosfera de Janos; tres los donó el Museo del Desierto.",
+   "Coordinaron la <b>Fundación Pro Cuatrociénegas</b>, el Fondo Mexicano para la Conservación de la Naturaleza, Cuenca Los Ojos y la CONANP.",
+   "Con dos becerros por hembra cada tres años, una manada así puede duplicarse en pocos años si el pastizal aguanta.",
+   "El proyecto enfrenta los mismos retos que Janos: financiamiento, fragmentación del hábitat y trámites."],
+ hook:"38 hembras y 6 machos: eso no es una exhibición, es una población tratando de arrancar."},
+
+tamano:{v:'eco',t:"Qué tan grande es",tag:"La especie",color:"#e2e8f0",sub:"Casi una tonelada, a tu lado",
+ d:"La silueta blanca del modelo mide <b>1,75 m</b>. Al lado, el bisonte le llega y le pasa: su joroba ronda los <b>1,9 m</b> de alto y el animal mide de <b>3 a 3,8 m</b> de largo. Pesa entre <b>318 y 907 kg</b>.",
+ f:["Es el animal terrestre más grande de Norteamérica.",
+   "Pese a su tamaño corre a más de <b>50 km/h</b> y salta obstáculos.",
+   "No es ganado: es fauna silvestre, y en México está listado <b>en peligro de extinción</b> por la NOM-059.",
+   "Acercarse en el campo es peligroso: son animales silvestres, no vacas."],
+ hook:"Ponerse al lado es la única manera de entender de qué tamaño es lo que se había perdido."},
+
 /* ---------------- VISTA 4 · LO QUE LO SECA ---------------- */
 tala:{v:'riesgo',t:"El bombeo para forraje",tag:"Amenaza",color:"#ef4444",sub:"82,8 % de la extracción es agrícola",
  d:"La causa principal no es el turismo ni el pueblo: es el <b>bombeo agrícola</b>. Casi toda el agua que se extrae del acuífero va a riego, y sobre todo a alfalfa para la industria lechera de la Comarca Lagunera.",
@@ -712,12 +929,14 @@ quefunciona:{v:'riesgo',t:"Lo que sí funciona",tag:"Solución",color:"#22c55e",
 };
 
 const VIEW_INDEX={
- terr:[["Empieza aquí",["valle","comosellaman","endemismo","anp"]],
+ terr:[["Empieza aquí",["valle","comosellaman","endemismo","anp","fundacion"]],
        ["Las seis sierras",["madera","fragua","sanmarcos","menchaca","purisima","vicente"]],
        ["Las pozas",["peces","azul","becerra","mezquites","churince","mojarral","escobedo","anteojo","playitas","tierrablanca","santatecla"]],
        ["El agua y el yeso",["acuifero","rios","dunas"]],
+       ["Los ríos del valle",["rmezquites","rgarabatal","rcanon","rbecerra","rchurince","rtecla"]],
+       ["Las plantas del valle",["mezquite","gobernadora","yuca"]],
        ["Quién vive y quién extrae",["pueblo","carretera","bisonte","canales","alfalfa"]],
-       ["Lo que hay alrededor",["detras","hundido","valles","desierto"]]],
+       ["Lo que hay alrededor",["detras","desierto","hundido","valles","burro","lagunera"]]],
  agua:[["El viaje del agua",["sierrarecarga","caliza","falla","poza"]],
        ["Cómo leer el corte",["corte","suelogyp","acuifero","basamento"]],
        ["Y a dónde se va",["canales"]]],
@@ -725,8 +944,8 @@ const VIEW_INDEX={
        ["El origen de la vida",["estromatolitos","tapete","marte"]],
        ["Peces endémicos",["cachorrito","mojarra","sardinita"]],
        ["Otros habitantes",["tortuga","caracoles","alacran","bisonte"]],
-       ["Plantas",["cactaceas","gipsofilas"]]],
- riesgo:[["Lo que lo está secando",["tala","canales","secado"]],
+       ["Plantas",["cactaceas","gipsofilas","mezquite","gobernadora"]]],
+  riesgo:[["Lo que lo está secando",["tala","canales","secado"]],
        ["Lo que sí funciona",["quefunciona"]]]
 };
 </script>
@@ -839,13 +1058,13 @@ function pathTube(pts,yoff,rad,col,opts){
 }
 /* marcador con línea guía: anillo en el suelo + asta + perilla + etiqueta */
 function pinMarker(group,key,x,y,z,color,txt,H,view,pri,dim){
-  const ring=new THREE.Mesh(new THREE.TorusGeometry(1.35,0.17,8,26),mat(color,{emi:.7}));
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(1.35,0.17,6,16),mat(color,{emi:.7}));
   ring.rotation.x=Math.PI/2; ring.position.set(x,y+0.12,z);
   ring.userData={key:key}; group.add(ring); if(key)clickables.push(ring);
-  const post=new THREE.Mesh(new THREE.CylinderGeometry(0.085,0.085,H,6),
+  const post=new THREE.Mesh(new THREE.CylinderGeometry(0.085,0.085,H,4),
     new THREE.MeshBasicMaterial({color:new THREE.Color(color),transparent:true,opacity:.55}));
   post.position.set(x,y+H/2,z); post.userData={nofit:true}; group.add(post);
-  const knob=new THREE.Mesh(new THREE.SphereGeometry(0.42,14,10),mat(color,{emi:.9}));
+  const knob=new THREE.Mesh(new THREE.SphereGeometry(0.42,10,7),mat(color,{emi:.9}));
   knob.position.set(x,y+H,z); knob.userData={key:key,nofit:true}; group.add(knob); if(key)clickables.push(knob);
   labelDefs.push({key:key,view:view,root:group,pri:pri===undefined?1:pri,txt:txt,ref:dim||!key,
     pos:new THREE.Vector3(x,y+H+1.0,z)});
@@ -916,6 +1135,20 @@ POZAS.forEach(function(P){
 });
 const pozaMesh={};
 
+/* El polígono del área protegida sirve para dos cosas: dibujar el trazo y
+   decidir qué es valle y qué es ya desierto abierto. */
+const ANP=[[-24,-20],[-16,-26],[-4,-28],[8,-26],[18,-22],[26,-16],[30,-6],[31,4],
+           [34,14],[30,22],[20,27],[8,29],[-4,30],[-14,27],[-22,20],[-27,10],
+           [-29,0],[-28,-10]];
+function dentroANP(x,z){
+  let d=false;
+  for(let i=0,j=ANP.length-1;i<ANP.length;j=i++){
+    const a=ANP[i],b=ANP[j];
+    if(((a[1]>z)!==(b[1]>z)) && (x < (b[0]-a[0])*(z-a[1])/(b[1]-a[1]+1e-9)+a[0])) d=!d;
+  }
+  return d;
+}
+
 /* --- construcción del relieve --- */
 const NX=232,NZ=180,X0=-46,X1=46,Z0=-34,Z1=34;
 let terrGeo=null;
@@ -961,8 +1194,17 @@ function buildTerrain(){
     else if(h>2050)   c.set('#6b6257');          // roca alta
     else if(h>1150)   c.set('#7d6a4f');          // ladera caliza
     else if(h>830)    c.set('#9c8863');          // bajada de piedemonte
-    else if(pz>0.15)  c.set('#4d7c6a');          // orilla húmeda
-    else              c.set('#b09a72');          // piso del valle
+    else if(pz>0.15)  c.set('#5f8a52');          // orilla húmeda: el verde va aquí
+    else {
+      /* el propio color del suelo dice cuánta planta hay: dentro del valle
+         pastizal, fuera matorral ralo sobre grava */
+      const v=dentroANP(x,z);
+      const mot=0.34*(0.5+0.5*Math.sin(x*0.55+z*0.31)*Math.cos(z*0.44-x*0.19))
+               +0.34*(0.5+0.5*Math.sin(x*1.7-z*1.1)*Math.cos(z*1.4+x*0.8))
+               +0.32*(0.5+0.5*Math.sin(x*3.6+z*2.9));
+      if(v) c.set('#a2a05e').lerp(new THREE.Color('#cdbd85'),0.25+0.75*mot);
+      else  c.set('#7d7355').lerp(new THREE.Color('#ab9a76'),0.40+0.60*mot);
+    }
     c.convertSRGBToLinear();
     col[i*3]=c.r; col[i*3+1]=c.g; col[i*3+2]=c.b;
   }
@@ -1037,6 +1279,92 @@ SIERRAS.forEach(function(S){
 })();
 
 
+/* fusiona varias geometrías en una sola: sirve para que un arbusto sea
+   un grupo de bultos y no una piedra facetada, sin multiplicar dibujos */
+function fusiona(geos){
+  let total=0; const nx=geos.map(function(g){const t=g.toNonIndexed();total+=t.attributes.position.count;return t;});
+  const pos=new Float32Array(total*3); let o=0;
+  nx.forEach(function(t){const p=t.attributes.position;
+    for(let i=0;i<p.count;i++){pos[o++]=p.getX(i);pos[o++]=p.getY(i);pos[o++]=p.getZ(i);}});
+  const G=new THREE.BufferGeometry();
+  G.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  G.computeVertexNormals(); return G;
+}
+/* un arbusto de gobernadora: tres bultos apiñados, no una bola */
+function matorralGeo(){
+  const a=new THREE.IcosahedronGeometry(0.46,0); a.scale(1,0.78,1); a.translate(0,0.30,0);
+  const b=new THREE.IcosahedronGeometry(0.33,0); b.scale(1,0.8,1);  b.translate(0.38,0.20,0.16);
+  const c=new THREE.IcosahedronGeometry(0.30,0); c.scale(1,0.85,1); c.translate(-0.30,0.22,-0.24);
+  const d=new THREE.IcosahedronGeometry(0.24,0); d.scale(1,0.9,1);  d.translate(0.06,0.58,-0.10);
+  return fusiona([a,b,c,d]);
+}
+/* A escala del valle (1 unidad ≈ 600 m) una planta suelta no cabe: lo que se
+   ve desde arriba son MANCHONES de cobertura. Por eso la vegetación del mapa
+   son motas planas, no arbolitos. Los ejemplares con etiqueta van aparte y a
+   propósito fuera de escala, como en la viñeta de un mapa. */
+function motaGeo(alto){
+  const g=new THREE.IcosahedronGeometry(0.62,0); g.scale(1,alto,1); return g;
+}
+/* macollo de zacate: pelitos finos abiertos, como en las fotos de la orilla */
+function macolloGeo(){
+  const hojas=[];
+  for(let i=0;i<5;i++){
+    const a=i/5*6.283+0.4;
+    const h=new THREE.ConeGeometry(0.055,1.0,3);
+    h.translate(0,0.5,0);
+    h.rotateZ(Math.cos(a)*0.30); h.rotateX(-Math.sin(a)*0.30);
+    h.translate(Math.cos(a)*0.05,0,Math.sin(a)*0.05);
+    hojas.push(h);
+  }
+  return fusiona(hojas);
+}
+/* gobernadora de verdad: ramas delgadas y abiertas, no una bola compacta */
+function gobernadoraGeo(){
+  const ps=[];
+  for(let i=0;i<9;i++){
+    const a=i/9*6.283+((i*7)%3)*0.2, incl=0.30+((i*5)%4)*0.10;
+    const r=new THREE.CylinderGeometry(0.020,0.045,0.95,3);
+    r.translate(0,0.47,0);
+    r.rotateZ(-Math.cos(a)*incl); r.rotateX(Math.sin(a)*incl);
+    r.translate(Math.cos(a)*0.06,0,Math.sin(a)*0.06);
+    ps.push(r);
+    const f=new THREE.IcosahedronGeometry(0.16+((i*3)%3)*0.03,0);
+    f.translate(Math.cos(a)*(0.30+incl*0.5),0.82+((i*5)%3)*0.10,Math.sin(a)*(0.30+incl*0.5));
+    ps.push(f);
+  }
+  return fusiona(ps);
+}
+/* yuca / sotol: la roseta de hojas rígidas de la orilla */
+function yucaGeo(){
+  const ps=[];
+  for(let i=0;i<16;i++){
+    const a=i/16*6.283, incl=0.5+((i*7)%5)*0.16;
+    const h=new THREE.ConeGeometry(0.075,1.25,3);
+    h.translate(0,0.62,0);
+    h.rotateZ(-Math.cos(a)*incl); h.rotateX(Math.sin(a)*incl);
+    ps.push(h);
+  }
+  const t=new THREE.CylinderGeometry(0.16,0.22,0.55,6); t.translate(0,-0.25,0); ps.push(t);
+  return fusiona(ps);
+}
+/* un mezquite: tronco que se bifurca y copa ancha y aparasolada */
+function mezquiteGeo(){
+  const ps=[];
+  const t=new THREE.CylinderGeometry(0.10,0.19,0.95,5); t.translate(0,0.47,0); ps.push(t);
+  [[0.42,0.34],[-0.40,0.30],[0.05,-0.42]].forEach(function(r){
+    const b=new THREE.CylinderGeometry(0.055,0.10,0.85,4);
+    b.translate(0,0.42,0);
+    b.rotateZ(-r[0]*0.9); b.rotateX(r[1]*0.9);
+    b.translate(r[0]*0.30,0.85,r[1]*0.30); ps.push(b);
+  });
+  [[0,1.55,0,0.62],[0.60,1.42,0.30,0.44],[-0.58,1.40,-0.22,0.42],
+   [0.24,1.62,-0.52,0.36],[-0.30,1.50,0.52,0.34]].forEach(function(c){
+    const k=new THREE.IcosahedronGeometry(c[3],1); k.scale(1.25,0.52,1.2);
+    k.translate(c[0],c[1],c[2]); ps.push(k);
+  });
+  return fusiona(ps);
+}
+
 /* =====================================================================
    LA VEGETACIÓN DEL VALLE
    Pastizal halófilo y matorral desértico: el piso no es arena pelada.
@@ -1045,37 +1373,49 @@ SIERRAS.forEach(function(S){
 (function(){
   const zac=[], mat_=[];
   const rnd=(function(){let s=20251130;return function(){s=(s*1103515245+12345)&0x7fffffff;return s/0x7fffffff;};})();
-  for(let i=0;i<11000;i++){
-    const x=X0+2+rnd()*(X1-X0-4), z=Z0+2+rnd()*(Z1-Z0-4);
-    const h=elev(x,z);
-    if(h>1150) continue;                          // arriba de la ladera ya no hay pastizal
-    if(pozaFuerza(x,z)>0.35) continue;            // dentro del agua no
+  /* Se siembra sobre los vértices que YA calculó el terreno.
+     Volver a llamar elev() 20 000 veces costaba 8 segundos de carga. */
+  const P=terrGeo.attributes.position, NV=P.count;
+  for(let k=0;k<17000;k++){
+    const i=(k*7919)%NV;
+    const x=P.getX(i), y=P.getY(i), z=P.getZ(i);
+    const h=(y/VE+0.62)*1000;
+    if(h>1350) continue;
+    if(pozaFuerza(x,z)>0.35) continue;
     if(pueblo(x,z)>0.5) continue;
     const ye=yeso(x,z);
-    const cerca=(function(){let m=0;POZAS.forEach(P=>{m=Math.max(m,1-smooth(P.r*1.0,P.r*3.2,Math.hypot(x-P.x,z-P.z)));});return m;})();
-    const dens=(1-smooth(820,1200,h))*(0.62+0.38*cerca)*(ye>0.4?0.28:1);
+    let cerca=0; for(let q=0;q<POZAS.length;q++){
+      const Q=POZAS[q];
+      const c=1-smooth(Q.r*1.0,Q.r*3.2,Math.hypot(x-Q.x,z-Q.z));
+      if(c>cerca) cerca=c;
+    }
+    const valle=dentroANP(x,z);
+    const dens=(1-smooth(900,1350,h))*(ye>0.4?0.30:1)*
+               (valle ? (0.80+0.20*cerca) : 0.42);
     if(rnd()>dens) continue;
-    (rnd()<0.72?zac:mat_).push([x,yOf(h),z,0.6+rnd()*0.9,rnd()*6.283]);
+    const esZac = valle ? (rnd()<0.74) : (rnd()<0.14);
+    (esZac?zac:mat_).push([x+(rnd()-0.5)*0.6,y,z+(rnd()-0.5)*0.6,
+                           (esZac?0.55:0.75)+rnd()*(esZac?0.55:0.55),rnd()*6.283]);
   }
   function siembra(lista,geo,color){
     if(!lista.length) return;
     const m=new THREE.InstancedMesh(geo,mat(color,{rough:.99}),lista.length);
     const d=new THREE.Object3D();
     lista.forEach(function(p,i){
-      d.position.set(p[0],p[1]+0.25*p[3],p[2]);
+      d.position.set(p[0],p[1],p[2]);
       d.rotation.set(0,p[4],0); d.scale.set(p[3],p[3],p[3]);
       d.updateMatrix(); m.setMatrixAt(i,d.matrix);
     });
     m.instanceMatrix.needsUpdate=true; m.userData={nofit:true}; gTerr.add(m);
   }
-  siembra(zac ,new THREE.ConeGeometry(0.34,1.0,5),'#a89a55');     // zacate
-  siembra(mat_,new THREE.SphereGeometry(0.42,7,5),'#5d6b42');     // gobernadora / matorral
+  siembra(zac ,macolloGeo(),'#c9b878');                           // zacatal en macollos
+  siembra(mat_,motaGeo(0.30),'#4f6236');                         // matorral disperso
 })();
 
 /* --- la carretera 30: el hilo que une el pueblo, la Becerra y las dunas --- */
 (function(){
-  const R=[[-15,-16],[-13,-11],[-12,-7],[-10,-3],[-13,0],[-16,-2],[-22,-4],[-30,-8]];
-  const t=pathTube(R,0.35,0.26,'#8a8378',{emi:.15});
+  const R=[[-15,-16],[-14,-12],[-15,-8],[-14,-4],[-16,-1],[-19,-2],[-24,-4],[-31,-8]];
+  const t=pathTube(R,0.12,0.17,'#8a8378',{emi:.15});
   if(t){ t.userData={key:'carretera'}; gTerr.add(t); clickables.push(t); }
   pinMarker(gTerr,'carretera',-22,yOf(elev(-22,-4)),-4,'#a8a29e',
     "Carretera 30 · a Torreón",8,'terr',6,true);
@@ -1085,9 +1425,6 @@ SIERRAS.forEach(function(S){
    CAPA · TRAZO DEL ÁREA PROTEGIDA
    ===================================================================== */
 const gTrazo=new THREE.Group(); gTerr.add(gTrazo);
-const ANP=[[-24,-20],[-16,-26],[-4,-28],[8,-26],[18,-22],[26,-16],[30,-6],[31,4],
-           [34,14],[30,22],[20,27],[8,29],[-4,30],[-14,27],[-22,20],[-27,10],
-           [-29,0],[-28,-10]];
 (function(){
   const t=pathTube(ANP,1.0,0.40,'#5eead4',{closed:true,emi:1.0});
   if(t){ t.userData={key:'anp'}; gTrazo.add(t); clickables.push(t); }
@@ -1150,7 +1487,7 @@ function nadan(now,dt){
     _pd.position.set(F.cx+Math.cos(F.a)*F.r, F.y+Math.sin(now/700+i)*0.06,
                      F.cz+Math.sin(F.a)*F.r*0.8);
     _pd.rotation.set(0,-F.a+Math.PI/2,0);
-    _pd.scale.set(1.05,1.05,1.05); _pd.updateMatrix();
+    _pd.scale.set(0.42,0.42,0.42); _pd.updateMatrix();
     pezA.setMatrixAt(i,_pd.matrix); pezB.setMatrixAt(i,_pd.matrix);
   }
   pezA.instanceMatrix.needsUpdate=true; pezB.instanceMatrix.needsUpdate=true;
@@ -1163,16 +1500,31 @@ function nadan(now,dt){
 
 /* =====================================================================
    CAPA · RÍOS Y ARROYOS DEL VALLE
+   Los cursos permanentes con nombre propio: Mezquites (hoy también llamado
+   San Marcos), Garabatal, Cañón, y los enlaces de los sistemas Churince y
+   Becerra. Trazos orientativos.
    ===================================================================== */
 const gRios=new THREE.Group(); gRios.visible=false; gTerr.add(gRios);
-[[[-1,5],[3,4],[8,3],[12,3],[16,4],[20,6]],
- [[8,11],[12,10],[16,9],[19,8]],
- [[-14,7],[-10,6],[-6,5],[-2,5]],
- [[14,-6],[17,-8],[20,-12]]].forEach(function(P){
-  const t=pathTube(P,0.55,0.28,'#38bdf8',{emi:.8});
-  if(t){t.userData={key:'rios'};gRios.add(t);clickables.push(t);}
+const RIOS=[
+ {k:'rmezquites',n:"Río Mezquites",   c:'#38bdf8',H:14,
+  p:[[-8,-3],[-3,-2],[3,-1],[9,0],[15,1]]},
+ {k:'rgarabatal',n:"Río Garabatal",   c:'#22d3ee',H:9,
+  p:[[-19,3],[-16,0],[-14,-4],[-12,-8]]},
+ {k:'rcanon',    n:"Río Cañón",       c:'#7dd3fc',H:17,
+  p:[[-29,-1],[-25,1],[-22,2],[-19,3]]},
+ {k:'rbecerra',  n:"Sistema Becerra", c:'#0ea5e9',H:20,
+  p:[[-12,-8],[-11,-11],[-10,-13]]},
+ {k:'rtecla',    n:"Enlace a Santa Tecla",c:'#38bdf8',H:12,
+  p:[[15,1],[17,-2],[19,-7]]},
+ {k:'rchurince', n:"Sistema Churince",c:'#22d3ee',H:24,
+  p:[[-20,3],[-18,0],[-17,-5]]}
+];
+RIOS.forEach(function(R){
+  const t=pathTube(R.p,0.5,0.26,R.c,{emi:.85});
+  if(t){t.userData={key:R.k};gRios.add(t);clickables.push(t);}
+  const m=R.p[Math.floor(R.p.length/2)];
+  pinMarker(gRios,R.k,m[0],yOf(elev(m[0],m[1])),m[1],R.c,R.n,R.H,'terr',1);
 });
-pinMarker(gRios,'rios',10,yOf(elev(10,3)),3,'#38bdf8',"Ríos que unen las pozas",9,'terr',4);
 
 /* =====================================================================
    CAPA · DUNAS DE YESO
@@ -1221,14 +1573,108 @@ const gCanal=new THREE.Group(); gCanal.visible=false; gTerr.add(gCanal);
 
 /* --- lo que hay del otro lado de cada sierra --- */
 (function(){
-  [[-40,10,'hundido','#fbbf24',"Valle de El Hundido · otra cuenca cerrada",10],
-   [38,-26,'valles','#a3e635',"Valles de Lamadrid y Nadadores · el riego",9],
-   [8,-33,'desierto','#94a3b8',"Desierto chihuahuense · sigue 300 km",8]].forEach(function(R){
+  [[-40,10,'hundido','#fbbf24',"Valle de El Hundido · otra cuenca cerrada",10]].forEach(function(R){
     const y=yOf(elev(R[0],R[1]));
     const d=new THREE.Mesh(new THREE.CylinderGeometry(3.2,3.2,0.2,24),mat(R[3],{emi:.3,op:.3}));
     d.position.set(R[0],y+0.3,R[1]); d.userData={key:R[2]};
     gTerr.add(d); clickables.push(d);
     pinMarker(gTerr,R[2],R[0],y,R[1],R[3],R[4],R[5],'terr',7,true);
+  });
+})();
+
+
+/* =====================================================================
+   EL DESIERTO DE ALREDEDOR
+   Un anillo de terreno alrededor del valle para que se vea que esto está
+   metido en el desierto chihuahuense: cuencas planas separadas por sierras
+   paralelas, el patrón "sierra y valle" de todo el norte. Va marcado como
+   "no cuenta para el encuadre": es contexto, no protagonista.
+   ===================================================================== */
+const EXT=34;
+const SIERRAS_LEJANAS=[
+ [[-120,-70],[-40,-88],5.0,930],   // norte: Serranías del Burro
+ [[-10,-92],[70,-76],5.5,837],
+ [[62,-52],[86,10],5.0,899],       // oriente: rumbo a Monclova
+ [[52,26],[104,62],5.5,806],
+ [[-30,58],[46,74],5.0,775],       // sur
+ [[-96,20],[-58,72],5.5,868],      // surponiente: hacia el Bolsón de Mapimí
+ [[-104,-34],[-72,16],5.0,837],
+ [[-66,-58],[-40,-30],4.5,713]
+];
+function elevExt(x,z){
+  let d=0;
+  for(let i=0;i<SIERRAS_LEJANAS.length;i++){
+    const L=SIERRAS_LEJANAS[i];
+    const v=ridge(x,z,L[0],L[1],L[2],L[3]);
+    if(v>d) d=v;
+  }
+  const base=735+smooth(30,-30,z)*14+fbm(x*0.6,z*0.6)*26;
+  const fuera=base+d+fbm(x,z)*(16+70*smooth(200,900,d));
+  /* mezcla suave hacia el borde del terreno principal: si no, quedaba un
+     escalón negro entre el valle y el anillo */
+  const dx=Math.max(X0-x,x-X1,0), dz=Math.max(Z0-z,z-Z1,0);
+  const t=smooth(0,16,Math.hypot(dx,dz));
+  return elev(x,z)*(1-t)+fuera*t;
+}
+(function entorno(){
+  const paso=2.4, pos=[], col=[], c=new THREE.Color();
+  function vert(x,z){
+    const h=elevExt(x,z);
+    pos.push(x,yOf(h),z);
+    const mot=0.5+0.5*Math.sin(x*0.30+z*0.19)*Math.cos(z*0.25-x*0.12);
+    if(h>1500)      c.set('#8a7f6c');
+    else if(h>1050) c.set('#96876a');
+    else if(h>860)  c.set('#a89774');
+    else            c.set('#8d8261').lerp(new THREE.Color('#bcab86'),0.40+0.60*mot);
+    c.convertSRGBToLinear(); col.push(c.r,c.g,c.b);
+  }
+  function banda(x0,x1,z0,z1){
+    for(let x=x0;x<x1-1e-6;x+=paso){
+      for(let z=z0;z<z1-1e-6;z+=paso){
+        const xa=x,xb=Math.min(x+paso,x1),za=z,zb=Math.min(z+paso,z1);
+        vert(xa,za);vert(xb,zb);vert(xb,za);
+        vert(xa,za);vert(xa,zb);vert(xb,zb);
+      }
+    }
+  }
+  banda(X0-EXT,X1+EXT,Z0-EXT,Z0);      // norte
+  banda(X0-EXT,X1+EXT,Z1,Z1+EXT);      // sur
+  banda(X0-EXT,X0,Z0,Z1);              // poniente
+  banda(X1,X1+EXT,Z0,Z1);              // oriente
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  g.setAttribute('color',new THREE.Float32BufferAttribute(col,3));
+  g.computeVertexNormals();
+  const m=new THREE.Mesh(g,new THREE.MeshStandardMaterial({vertexColors:true,roughness:.98}));
+  m.userData={key:'desierto',nofit:true};
+  gTerr.add(m); clickables.push(m);
+  window.entornoMesh=m;
+
+  /* matorral disperso del desierto abierto, muy ralo */
+  const arb=[], rnd=(function(){let s=777;return function(){s=(s*1103515245+12345)&0x7fffffff;return s/0x7fffffff;};})();
+  for(let i=0;i<9000;i++){
+    const x=X0-EXT+rnd()*((X1+EXT)-(X0-EXT));
+    const z=Z0-EXT+rnd()*((Z1+EXT)-(Z0-EXT));
+    if(x>X0&&x<X1&&z>Z0&&z<Z1) continue;
+    const h=elevExt(x,z);
+    if(h>1000) continue;
+    if(rnd()>0.30) continue;
+    arb.push([x,yOf(h),z,0.9+rnd()*0.8,rnd()*6.283]);
+  }
+  esparcir(arb,motaGeo(0.30),'#4f6236',gTerr);
+  gTerr.children.forEach(function(o){ if(o.isInstancedMesh&&!o.userData.key) o.userData={nofit:true}; });
+
+  /* referencias del entorno */
+  [[0,-62,'desierto','#b6a689',"Desierto chihuahuense · sigue 300 km",9],
+   [68,-6,'valles','#a3e635',"Monclova y Frontera · 80 km al oriente",10],
+   [-62,52,'lagunera','#f472b6',"Comarca Lagunera · a donde va la alfalfa",12],
+   [-58,-44,'burro','#94a3b8',"Serranías del Burro",8]].forEach(function(R){
+    const y=yOf(elevExt(R[0],R[1]));
+    const d=new THREE.Mesh(new THREE.CylinderGeometry(4.0,4.0,0.2,20),mat(R[3],{emi:.3,op:.30}));
+    d.position.set(R[0],y+0.3,R[1]); d.userData={key:R[2],nofit:true};
+    gTerr.add(d); clickables.push(d);
+    pinMarker(gTerr,R[2],R[0],y,R[1],R[3],R[4],R[5],'terr',8,true);
+    labelDefs[labelDefs.length-1].nofit=true;
   });
 })();
 
@@ -1266,15 +1712,15 @@ const gAcuif=new THREE.Group(); gAcuif.visible=false; gTerr.add(gAcuif);
 /* El bisonte se arma por piezas y se dibuja INSTANCIADO: 44 animales
    completos costarían ~400 llamadas de dibujo; así cuestan 9. */
 const BIS_PARTES=[
- {g:()=>new THREE.SphereGeometry(1,14,10),   c:'#4a3728', p:[0,1.05,0],    e:[0,0,0],       s:[1.5,0.85,0.9], clic:true},
- {g:()=>new THREE.SphereGeometry(0.62,12,9), c:'#3b2b1e', p:[0.45,1.62,0], e:[0,0,0],       s:[1.1,0.9,0.85]},
- {g:()=>new THREE.SphereGeometry(0.46,12,9), c:'#2f2318', p:[1.55,0.92,0], e:[0,0,0],       s:[1.15,1,0.85]},
- {g:()=>new THREE.ConeGeometry(0.09,0.36,6), c:'#d6d3d1', p:[1.62,1.28,0.33],  e:[0.6,0,-0.5], s:[1,1,1]},
- {g:()=>new THREE.ConeGeometry(0.09,0.36,6), c:'#d6d3d1', p:[1.62,1.28,-0.33], e:[-0.6,0,0.5], s:[1,1,1]},
- {g:()=>new THREE.CylinderGeometry(0.14,0.11,1.0,6),c:'#33261a',p:[0.75,0.5,0.42], e:[0,0,0], s:[1,1,1]},
- {g:()=>new THREE.CylinderGeometry(0.14,0.11,1.0,6),c:'#33261a',p:[0.75,0.5,-0.42],e:[0,0,0], s:[1,1,1]},
- {g:()=>new THREE.CylinderGeometry(0.14,0.11,1.0,6),c:'#33261a',p:[-0.75,0.5,0.42],e:[0,0,0], s:[1,1,1]},
- {g:()=>new THREE.CylinderGeometry(0.14,0.11,1.0,6),c:'#33261a',p:[-0.75,0.5,-0.42],e:[0,0,0],s:[1,1,1]}
+ {g:()=>new THREE.SphereGeometry(1,10,7),    c:'#4a3728', p:[0,1.05,0],    e:[0,0,0],       s:[1.5,0.85,0.9], clic:true},
+ {g:()=>new THREE.SphereGeometry(0.62,9,6),  c:'#3b2b1e', p:[0.45,1.62,0], e:[0,0,0],       s:[1.1,0.9,0.85]},
+ {g:()=>new THREE.SphereGeometry(0.46,9,6),  c:'#2f2318', p:[1.55,0.92,0], e:[0,0,0],       s:[1.15,1,0.85]},
+ {g:()=>new THREE.ConeGeometry(0.09,0.36,5), c:'#d6d3d1', p:[1.62,1.28,0.33],  e:[0.6,0,-0.5], s:[1,1,1]},
+ {g:()=>new THREE.ConeGeometry(0.09,0.36,5), c:'#d6d3d1', p:[1.62,1.28,-0.33], e:[-0.6,0,0.5], s:[1,1,1]},
+ {g:()=>new THREE.CylinderGeometry(0.14,0.11,1.0,5),c:'#33261a',p:[0.75,0.5,0.42], e:[0,0,0], s:[1,1,1]},
+ {g:()=>new THREE.CylinderGeometry(0.14,0.11,1.0,5),c:'#33261a',p:[0.75,0.5,-0.42],e:[0,0,0], s:[1,1,1]},
+ {g:()=>new THREE.CylinderGeometry(0.14,0.11,1.0,5),c:'#33261a',p:[-0.75,0.5,0.42],e:[0,0,0], s:[1,1,1]},
+ {g:()=>new THREE.CylinderGeometry(0.14,0.11,1.0,5),c:'#33261a',p:[-0.75,0.5,-0.42],e:[0,0,0],s:[1,1,1]}
 ];
 function manada(animales,grupo,key){
   const A=new THREE.Object3D(), B=new THREE.Object3D(), M=new THREE.Matrix4();
@@ -1334,21 +1780,63 @@ function esparcir(lista,geo,color,grupo){
 (function(){
   const car=[];
   POZAS.forEach(function(P){
-    for(let i=0;i<13;i++){
-      const a=i/13*6.28+((i*13)%7)*0.06, r=P.r*(1.02+((i*5)%4)*0.045);
+    for(let i=0;i<26;i++){
+      const a=i/26*6.28+((i*13)%7)*0.03, r=P.r*(1.01+((i*5)%4)*0.04);
       const x=P.x+Math.cos(a)*r, z=P.z+Math.sin(a)*r*0.82;
-      car.push([x,yOf(elev(x,z))+0.75,z,a,0.9+((i*3)%4)*0.12]);
+      car.push([x,yOf(elev(x,z)),z,a,0.9+((i*3)%4)*0.14]);
     }
   });
-  esparcir(car,new THREE.ConeGeometry(0.26,1.5,6),'#4d7c3f');
+  esparcir(car,macolloGeo(),'#8fa05a');
   const mez=[];
   [[-27,-9],[-22,-4],[-19,-9],[-26,-2],[-31,-3],[-21,-14],[-30,-9],[-24,-12]].forEach(function(p){
     mez.push([p[0],yOf(elev(p[0],p[1]))+0.65,p[1],0,1]);
   });
-  esparcir(mez,new THREE.CylinderGeometry(0.12,0.18,1.3,6),'#5b4636');
-  esparcir(mez.map(m=>[m[0],m[1]+0.85,m[2],0,1]),
-           (function(){const g=new THREE.SphereGeometry(0.85,10,8);g.scale(1.2,0.55,1.1);return g;})(),
-           '#5f6b40');
+
+  /* un mezquite y una gobernadora de tamaño legible, con etiqueta:
+     antes se perdían entre las miles de matas instanciadas */
+  (function(){
+    const mx=-7, mz=17, my=yOf(elev(mx,mz));
+    const base=new THREE.Mesh(new THREE.CircleGeometry(6.0,32),mat('#3c4a2a',{emi:.15,op:.85}));
+    base.rotation.x=-Math.PI/2; base.position.set(mx,my+0.25,mz); base.scale.set(1,0.85,1);
+    base.userData={key:'mezquite'}; gTerr.add(base); clickables.push(base);
+    const arb=new THREE.Mesh(mezquiteGeo(),mat('#9dbb5c',{rough:.9,emi:.20}));
+    arb.scale.set(4.2,4.2,4.2); arb.position.set(mx,my,mz);
+    arb.userData={key:'mezquite'}; gTerr.add(arb); clickables.push(arb);
+    const tro=new THREE.Mesh(new THREE.CylinderGeometry(0.5,0.85,3.6,8),mat('#4a3524',{rough:.97,emi:.08}));
+    tro.position.set(mx,my+1.8,mz); tro.userData={key:'mezquite'};
+    gTerr.add(tro); clickables.push(tro);
+    /* vainas: es lo que la gente reconoce del mezquite */
+    for(let i=0;i<9;i++){
+      const a=i/9*6.283, r=2.6+((i*5)%3)*0.5;
+      const v=new THREE.Mesh(new THREE.CylinderGeometry(0.09,0.09,1.5,4),mat('#cbb45f',{emi:.25}));
+      v.position.set(mx+Math.cos(a)*r,my+5.4,mz+Math.sin(a)*r*0.9);
+      v.userData={key:'mezquite',nofit:true}; gTerr.add(v); clickables.push(v);
+    }
+    pinMarker(gTerr,'mezquite',mx,my,mz,'#8fa055',"Mezquite",17,'terr',2);
+    const gx=-14, gz=13, gy=yOf(elev(gx,gz));
+    const gbase=new THREE.Mesh(new THREE.CircleGeometry(5.0,28),mat('#3c4a2a',{emi:.15,op:.85}));
+    gbase.rotation.x=-Math.PI/2; gbase.position.set(gx,gy+0.25,gz); gbase.scale.set(1,0.85,1);
+    gbase.userData={key:'gobernadora'}; gTerr.add(gbase); clickables.push(gbase);
+    for(let i=0;i<5;i++){
+      const a=i/5*6.283, r=(i?1.9:0);
+      const b=new THREE.Mesh(gobernadoraGeo(),mat('#7f9c46',{rough:.95,emi:.18}));
+      const e=i?2.4:3.4; b.scale.set(e,e,e);
+      b.rotation.y=a; b.position.set(gx+Math.cos(a)*r,gy,gz+Math.sin(a)*r*0.9);
+      b.userData={key:'gobernadora'}; gTerr.add(b); clickables.push(b);
+    }
+    pinMarker(gTerr,'gobernadora',gx,gy,gz,'#7f9455',"Gobernadora",11,'terr',2);
+    /* la yuca de la orilla: la planta de la foto clásica de Cuatro Ciénegas */
+    const yx=-9, yz=8, yy=yOf(elev(yx,yz));
+    const yb=new THREE.Mesh(new THREE.CircleGeometry(4.4,28),mat('#4a4a30',{emi:.15,op:.85}));
+    yb.rotation.x=-Math.PI/2; yb.position.set(yx,yy+0.25,yz); yb.scale.set(1,0.85,1);
+    yb.userData={key:'yuca'}; gTerr.add(yb); clickables.push(yb);
+    const yu=new THREE.Mesh(yucaGeo(),mat('#5f7f4a',{rough:.95,emi:.16}));
+    yu.scale.set(3.4,3.4,3.4); yu.position.set(yx,yy+1.0,yz);
+    yu.userData={key:'yuca'}; gTerr.add(yu); clickables.push(yu);
+    const yt=new THREE.Mesh(new THREE.CylinderGeometry(0.55,0.75,2.2,8),mat('#7a6a4a',{rough:.98}));
+    yt.position.set(yx,yy+1.1,yz); yt.userData={key:'yuca'}; gTerr.add(yt); clickables.push(yt);
+    pinMarker(gTerr,'yuca',yx,yy,yz,'#86a35c',"Yuca",8,'terr',2);
+  })();
 })();
 
 /* --- cielo estrellado: aquí el turismo de estrellas es parte del lugar --- */
@@ -1516,7 +2004,8 @@ const ZONAS=[
  {k:'fondo',   n:"Fondo de la poza · estromatolitos", c:'#0e7490', x0:-9, x1:9},
  {k:'columna', n:"Columna de agua · los peces",       c:'#0891b2', x0:9,  x1:17},
  {k:'orilla',  n:"Orilla y humedal · la tortuga",     c:'#4d7c6a', x0:17, x1:26},
- {k:'dunas',   n:"Dunas de yeso y desierto",          c:'#e8e2d2', x0:26, x1:40}
+ {k:'dunas',   n:"Dunas de yeso y desierto",          c:'#e8e2d2', x0:26, x1:40},
+ {k:'pastizal',n:"Pastizal · el bisonte que volvió",   c:'#9a8f52', x0:40, x1:56}
 ];
 const ECOZ=16;
 (function escenario(){
@@ -1542,6 +2031,17 @@ const ECOZ=16;
   }
 })();
 
+function bisonteMesh(s){                        // el mismo animal del valle, en detalle
+  const g=new THREE.Group();
+  BIS_PARTES.forEach(function(P){
+    const m=new THREE.Mesh(P.g(),mat(P.c,{rough:.9,emi:.14}));
+    m.position.set(P.p[0]*s,P.p[1]*s,P.p[2]*s);
+    m.rotation.set(P.e[0],P.e[1],P.e[2]);
+    m.scale.set(P.s[0]*s,P.s[1]*s,P.s[2]*s);
+    g.add(m);
+  });
+  return g;
+}
 function parte(geo,col,o){o=o||{};const m=new THREE.Mesh(geo,mat(col,o));return m;}
 function pez(largo,col,col2){
   const g=new THREE.Group();
@@ -1590,6 +2090,50 @@ function cactus(s){
   });
   return g;
 }
+function mezquiteMesh(s){
+  const g=new THREE.Group();
+  const t=parte(new THREE.CylinderGeometry(s*0.13,s*0.22,s*1.5,8),'#5b4636',{rough:.97});
+  t.position.y=s*0.75; g.add(t);
+  [[0,1.85,0,1.15],[0.6,1.6,0.35,0.8],[-0.55,1.55,-0.3,0.75]].forEach(function(c){
+    const cp=parte(new THREE.SphereGeometry(s*c[3],12,9),'#6b7a45',{rough:.97});
+    cp.scale.set(1.15,0.6,1.1); cp.position.set(s*c[0],s*c[1],s*c[2]); g.add(cp);
+  });
+  /* las vainas, que es lo que la gente reconoce */
+  for(let i=0;i<6;i++){
+    const a=i/6*6.283;
+    const v=parte(new THREE.CylinderGeometry(s*0.03,s*0.03,s*0.5,5),'#c2a45a',{rough:.9});
+    v.position.set(Math.cos(a)*s*0.75,s*1.42,Math.sin(a)*s*0.7); g.add(v);
+  }
+  return g;
+}
+function gobernadoraMesh(s){
+  const g=new THREE.Group();
+  for(let i=0;i<9;i++){
+    const a=i/9*6.283, r=(i%3)*0.28*s;
+    const b=parte(new THREE.SphereGeometry(s*(0.44-(i%3)*0.06),10,8),'#4f6136',{rough:.99});
+    b.scale.set(1,0.9,1); b.position.set(Math.cos(a)*r,s*0.42+((i*7)%3)*s*0.12,Math.sin(a)*r); g.add(b);
+  }
+  return g;
+}
+function yucaEco(s){
+  const g=new THREE.Group();
+  for(let i=0;i<16;i++){
+    const a=i/16*6.283, incl=0.5+((i*7)%5)*0.16;
+    const h=parte(new THREE.ConeGeometry(s*0.075,s*1.25,3),'#5f7f4a',{rough:.95});
+    h.position.y=s*0.62; h.rotation.z=-Math.cos(a)*incl; h.rotation.x=Math.sin(a)*incl;
+    const w=new THREE.Group(); w.add(h); w.rotation.y=a; g.add(w);
+  }
+  const t=parte(new THREE.CylinderGeometry(s*0.16,s*0.22,s*0.55,6),'#7a6a4a',{rough:.98});
+  t.position.y=-s*0.25; g.add(t);
+  return g;
+}
+function manadita(){
+  const g=new THREE.Group();
+  [[0,0,0.85],[3.4,1.6,0.8],[1.6,-2.4,0.5]].forEach(function(p,i){
+    const b=bisonteMesh(p[2]); b.position.set(p[0],0,p[1]); b.rotation.y=i*1.4; g.add(b);
+  });
+  return g;
+}
 function gipsofila(s){
   const g=new THREE.Group();
   for(let i=0;i<9;i++){
@@ -1626,6 +2170,11 @@ const VIDA=[
  {k:'alacran',    n:"Alacrán del desierto",    x:29, z:3,  y:0.2, s:1.0, tipo:'fauna', mk:()=>alacran(2.0), H:8},
  {k:'cactaceas',  n:"Cactáceas del valle",     x:31, z:-3, y:0,   s:1.4, tipo:'flora', mk:()=>cactus(2.2), H:10},
  {k:'gipsofilas', n:"Plantas del yeso",        x:36, z:1,  y:0,   s:1.6, tipo:'flora', mk:()=>gipsofila(2.6), H:6},
+ {k:'mezquite',   n:"Mezquite",                x:27, z:-6, y:0,   s:2.2, tipo:'flora', mk:()=>mezquiteMesh(2.0), H:14},
+ {k:'gobernadora',n:"Gobernadora",             x:35, z:6,  y:0,   s:1.5, tipo:'flora', mk:()=>gobernadoraMesh(1.5), H:9},
+ {k:'yuca',       n:"Yuca",                    x:24, z:-6, y:0,   s:1.8, tipo:'flora', mk:()=>yucaEco(1.9), H:12},
+ {k:'bisonte',    n:"Bisonte americano",       x:46, z:-2, y:0,   s:3.0, tipo:'fauna', mk:()=>bisonteMesh(1.5), H:16},
+ {k:'manada',     n:"La manada de El Santuario",x:52, z:6, y:0,   s:2.0, tipo:'fauna', mk:()=>manadita(), H:9},
  {k:'tapete',     n:"Tapetes microbianos",     x:5,  z:5,  y:0.5, s:1.0, tipo:'flora', mk:null, H:8}
 ];
 VIDA.forEach(function(V){
@@ -1827,13 +2376,13 @@ elBack.addEventListener('click',function(){
 const VIEW_TITLE={terr:'El valle',agua:'La poza por dentro',eco:'La vida',riesgo:'Lo que lo seca'};
 const VIEW_LEAD={terr:'Toca las sierras, las pozas o el trazo del área protegida',
                  agua:'Sigue el agua: entra en la sierra, viaja hondo y brota en la poza',
-                 eco:'Del fondo de la poza a las dunas de yeso',
+                 eco:'Del fondo de la poza al pastizal, hábitat por hábitat',
                  riesgo:'Mueve la línea de tiempo y mira cómo se encoge el humedal'};
 const VIEW_SUB={terr:'Relieve y posición de las pozas esquemáticos · vertical ≈ ×4,4 · valle ≈ 740 m',
                 agua:'Corte esquemático del sistema cárstico',
-                eco:'Especies endémicas por hábitat',
+                eco:'Las especies del valle, agrupadas por dónde viven',
                 riesgo:'Superficie de humedal respecto de la original'};
-const CAM={terr:[0.46,0.92,120],agua:[0.10,1.30,80],eco:[0.55,1.15,60],riesgo:[0.46,0.92,120]};
+const CAM={terr:[0.46,0.92,120],agua:[0.10,1.30,80],eco:[0.60,1.12,64],riesgo:[0.46,0.92,120]};
 let view='terr',showLabels=true,conBosque=true,year=2026;
 
 function syncLayerLabels(id){
